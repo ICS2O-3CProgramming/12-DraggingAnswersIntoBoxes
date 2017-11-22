@@ -67,10 +67,6 @@ local answerText
 -- LOCAL FUNCTIONS
 -----------------------------------------------------------------------------------------
 
-local function LevelStartDelay()
-    timer.performWithDelay(1600, LevelStart)
-end 
-
         -- Creating Transitioning Function back to main menu
 local function YouLoseTransition( )
     audio.stop()
@@ -100,6 +96,110 @@ local function ResetSoccerBallDelay()
     timer.performWithDelay(200,ResetSoccerBall )
 end
 ------------------------------------------------------------------------------
+
+
+local function DisplayQuestion()
+    local randomNumber1
+    local randomNumber2
+
+    --set random numbers
+    randomNumber1 = math.random(1, 10)
+    randomNumber2 = math.random(1, 10)
+
+    --calculate answer
+    answer = randomNumber1 + randomNumber2
+
+    --changing the answerText
+    answerText.text = "Answer: " .. answer
+
+    --change question text in relation to answer
+    questionText.text = randomNumber1 .. " + " .. randomNumber2 .. " = " 
+
+    end
+
+local function DisplayAnswers()
+        local alternateNumber1
+        local alternateNumber2     
+        
+        --make sure boxes are not clicked at the beginning
+        answerboxAlreadyTouched = false
+        alternateAnswerBox1AlreadyTouched = false
+        alternateAnswerBox2AlreadyTouched = false
+
+        --set response text to nothing
+        responseText.text = ""         
+
+        --make a different answer to the correct answer.
+        alternateNumber1 = answer + math.random(3, 5)
+        alternateAnswerBox1.text = alternateNumber1
+
+        alternateNumber2 = answer - math.random(1, 2)
+        --set random number to alternate option
+        alternateAnswerBox2.text = alternateNumber2
+
+        
+        answerbox.text = answer
+-------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+--ROMDOMLY SELECT ANSWER BOX POSITIONS
+-----------------------------------------------------------------------------------------
+    alternateAnswerBox1.x = display.contentWidth * 0.9
+    alternateAnswerBox2.x = display.contentWidth * 0.9
+    answerbox.x = display.contentWidth * 0.9
+
+    answerbox.y = math.random(1,3)
+
+    -------------------------
+    --situation 1
+    if (answerbox.y == 1) then
+        answerbox.y = display.contentHeight * 0.4
+
+        --alternateAnswerBox2
+        alternateAnswerBox2.y = display.contentHeight * 0.70
+
+        --alternateAnswerBox1
+        alternateAnswerBox1.y = display.contentHeight * 0.55
+
+        ---------------------------------------------------------
+        --remembering their positions
+        alternateAnswerBox1PreviousY = alternateAnswerBox1.y
+        alternateAnswerBox2PreviousY = alternateAnswerBox2.y
+        answerboxPreviousY = answerbox.y 
+
+    --situation 2
+    elseif (answerbox.y == 2) then
+
+        answerbox.y = display.contentHeight * 0.55
+        
+        --alternateAnswerBox2
+        alternateAnswerBox2.y = display.contentHeight * 0.7
+
+        --alternateAnswerBox1
+        alternateAnswerBox1.y = display.contentHeight * 0.40
+
+
+        alternateAnswerBox1PreviousY = alternateAnswerBox1.y
+        alternateAnswerBox2PreviousY = alternateAnswerBox2.y
+        answerboxPreviousY = answerbox.y 
+
+    --situation 3
+     elseif (answerbox.y == 3) then
+        answerbox.y = display.contentHeight * 0.70
+
+        --alternateAnswerBox2
+        alternateAnswerBox2.y = display.contentHeight * 0.55
+
+        --alternateAnswerBox1
+        alternateAnswerBox1.y = display.contentHeight * 0.4
+
+        alternateAnswerBox1PreviousY = alternateAnswerBox1.y
+        alternateAnswerBox2PreviousY = alternateAnswerBox2.y
+        answerboxPreviousY = answerbox.y 
+
+    end
+    
+end
+
 
 local function TouchListenerAnswerbox(touch)
     --only work if none of the other boxes have been touched
@@ -213,6 +313,7 @@ local function TouchListenerAnswerBox2(touch)
 end -- end of TouchListenerAnswerBox2(touch)
     
   
+
 local function AddAnswerBoxEventListeners()
     answerbox:addEventListener("touch", TouchListenerAnswerbox)
     alternateAnswerBox1:addEventListener("touch", TouchListenerAnswerBox1)
@@ -227,107 +328,6 @@ local function RemoveAnswerBoxEventListeners()
 
 end -- end of AddAnswerBoxEventListeners()
 
-local function DisplayQuestion()
-    local randomNumber1
-    local randomNumber2
-
-    --set random numbers
-    randomNumber1 = math.random(1, 10)
-    randomNumber2 = math.random(1, 10)
-
-    --calculate answer
-    answer = randomNumber1 + randomNumber2
-
-    --changing the answerText
-    answerText.text = "Answer: " .. answer
-
-    --change question text in relation to answer
-    questionText.text = randomNumber1 .. " + " .. randomNumber2 .. " = " 
-
-    end
-
-local function DisplayAnswers()
-        local alternateNumber1
-        local alternateNumber2     
-        
-        --make sure boxes are not clicked at the beginning
-        answerboxAlreadyTouched = false
-        alternateAnswerBox1AlreadyTouched = false
-        alternateAnswerBox2AlreadyTouched = false
-
-        --set response text to nothing
-        responseText.text = ""         
-
-        --make a different answer to the correct answer.
-        alternateNumber1 = answer + math.random(3, 5)
-        alternateAnswerBox1.text = alternateNumber1
-
-        alternateNumber2 = answer - math.random(1, 2)
-        --set random number to alternate option
-        alternateAnswerBox2.text = alternateNumber2
-
-        
-        answerbox.text = answer
--------------------------------------------------------------------------------------------
--------------------------------------------------------------------------------------------
---ROMDOMLY SELECT ANSWER BOX POSITIONS
------------------------------------------------------------------------------------------
-    alternateAnswerBox1.x = display.contentWidth * 0.9
-    alternateAnswerBox2.x = display.contentWidth * 0.9
-    answerbox.x = display.contentWidth * 0.9
-
-    answerbox.y = math.random(1,3)
-
-    -------------------------
-    --situation 1
-    if (answerbox.y == 1) then
-        answerbox.y = display.contentHeight * 0.4
-
-        --alternateAnswerBox2
-        alternateAnswerBox2.y = display.contentHeight * 0.70
-
-        --alternateAnswerBox1
-        alternateAnswerBox1.y = display.contentHeight * 0.55
-
-        ---------------------------------------------------------
-        --remembering their positions
-        alternateAnswerBox1PreviousY = alternateAnswerBox1.y
-        alternateAnswerBox2PreviousY = alternateAnswerBox2.y
-        answerboxPreviousY = answerbox.y 
-
-    --situation 2
-    elseif (answerbox.y == 2) then
-
-        answerbox.y = display.contentHeight * 0.55
-        
-        --alternateAnswerBox2
-        alternateAnswerBox2.y = display.contentHeight * 0.7
-
-        --alternateAnswerBox1
-        alternateAnswerBox1.y = display.contentHeight * 0.40
-
-
-        alternateAnswerBox1PreviousY = alternateAnswerBox1.y
-        alternateAnswerBox2PreviousY = alternateAnswerBox2.y
-        answerboxPreviousY = answerbox.y 
-
-    --situation 3
-     elseif (answerbox.y == 3) then
-        answerbox.y = display.contentHeight * 0.70
-
-        --alternateAnswerBox2
-        alternateAnswerBox2.y = display.contentHeight * 0.55
-
-        --alternateAnswerBox1
-        alternateAnswerBox1.y = display.contentHeight * 0.4
-
-        alternateAnswerBox1PreviousY = alternateAnswerBox1.y
-        alternateAnswerBox2PreviousY = alternateAnswerBox2.y
-        answerboxPreviousY = answerbox.y 
-
-    end
-    
-end
 
 local function LevelStart()
     DisplayQuestion()
@@ -336,11 +336,21 @@ local function LevelStart()
                 
 end
 
+
+local function LevelStartDelay()
+    timer.performWithDelay(1600, LevelStart)
+end 
+
 local function RestartLevel1()
     LevelStart()
 end
 
-local function UserAnswerInput()
+-----------------------------------------------------------------------------------------
+-- GLOBAL FUNCTIONS
+-----------------------------------------------------------------------------------------
+
+
+function UserAnswerInput()
     local animationNumber
     animationNumber = math.random(1,3)
     RemoveAnswerBoxEventListeners()
