@@ -1,28 +1,23 @@
--- Designed for iPad in landscape
-application = {
-    content = {
-        width = 768,
-        height = 1024, 
-        scale = "letterBox",
-        fps = 30,
-                
-        imageSuffix = {
-            ["@2x"] = 2,
-        }
+--
+-- For more information on config.lua see the Project Configuration Guide at:
+-- https://docs.coronalabs.com/guide/basics/configSettings
+--
+
+application =
+{
+	content =
+	{
+		width = 768,
+		height = 1024, 
+		scale = "letterbox",
+		fps = 60,
+		
+		--[[
+		imageSuffix =
+		{
+			    ["@2x"] = 2,
+			    ["@4x"] = 4,
+		},
+		--]]
 	},
-
-    --[[
-    -- Push notifications
-
-    notification =
-    {
-        iphone =
-        {
-            types =
-            {
-                "badge", "sound", "alert", "newsstand"
-            }
-        }
-    }
-    --]]    
 }

@@ -1,49 +1,57 @@
--- Designed for iPad in landscape
--- Supported values for orientation:
--- portrait, portraitUpsideDown, landscapeLeft, landscapeRight
+--
+-- For more information on build.settings, see the Project Build Settings guide at:
+-- https://docs.coronalabs.com/guide/distribution/buildSettings
+--
 
-settings = {
-	
-	orientation = {
+settings =
+{
+	orientation =
+	{
+		-- Supported values for orientation:
+		-- portrait, portraitUpsideDown, landscapeLeft, landscapeRight
 		default = "landscapeRight",
-		supported = { "landscapeRight", "landscapeLeft"}
+		supported = { "landscapeRight", },
 	},
-	
-	iphone = {
-		plist = {
-			CFBundleIdentifier = "ca.immaculata.Ultimate-Soccer",	
 
-			UIStatusBarHidden = true,
-			UIPrerenderedIcon = true, 
-			UIApplicationExitsOnSuspend = false, 
-
-            CFBundleIconFiles = 
-			{
-				"AppLogo.png",
-				"Icon.png",
-				"Icon@2x.png",
-				"Icon-Small-40.png",
-				"Icon-Small-40@2x.png",
-				"Icon-60.png",
-				"Icon-60@2x.png",
-				"Icon-72.png",
-				"Icon-72@2x.png",
-				"Icon-76.png",
-				"Icon-76@2x.png",
-				"Icon-Small-50.png",
-				"Icon-Small-50@2x.png",
-				"Icon-Small.png",
-				"Icon-Small@2x.png"
-			}
-		}
+	--
+	-- Android section
+	--
+	android =
+	{
+		usesPermissions =
+		{
+			"android.permission.INTERNET",
+		},
 	},
-	
-	--[[
-	-- Android permissions
 
-	androidPermissions = {
-  		"android.permission.INTERNET",
-  	},
+	--
+	-- iOS section
+	--
+	iphone =
+	{
+		xcassets = "Images.xcassets",
+		plist =
+		{
+			UIStatusBarHidden = false,
+			UILaunchStoryboardName = "LaunchScreen",
+		},
+	},
 
-	]]--
+	--
+	-- Plugins section
+	--
+	plugins =
+	{
+
+	},
+
+	--
+	-- Project section
+	--
+	excludeFiles =
+	{
+		-- Exclude unnecessary files for each platform
+		all = { "Icon.png", "Icon-*dpi.png", "Images.xcassets", },
+		android = { "LaunchScreen.storyboardc", },
+	},
 }
